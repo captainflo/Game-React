@@ -1,0 +1,77 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+  background: #8E2DE2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff 
+}
+
+/* Navbar */
+nav{
+  background-color: transparent  !important;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Footer */
+.page-footer{
+  border-top: 1px solid #fff;
+  background: #8E2DE2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+/* Signin & Signup */
+.box-input-signin{
+  display: block;
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.box-input-signin input{
+  color: #fff
+}
+.btn-signin{
+  width: 45%;
+}
+
+/* UserShow */
+.card{
+  color: black;
+  padding: 10px;
+}
+.card input, .card input[type=text]:not(.browser-default).validate+label, .card input.valid[type=text]:not(.browser-default), .card input[type=text]:not(.browser-default):focus:not([readonly]){
+  color: black !important;
+}
+
+.top-left {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 16px;
+}
+
+.avatar-card {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+
+@media only screen and (max-width: 600px) {
+  /* Signin Signup */
+  .box-input-signin{
+    width: 100%;
+  }
+  .btn-signin{
+    width: 100%;
+  }
+}
