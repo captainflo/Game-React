@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import '../css/Welcome.css';
+import Slider from '../utils/Slider';
 import Footer from '../utils/Footer';
 
 class Welcome extends React.Component {
   render() {
     return (
-      <div className="center">
-        hello
+      <div>
+        <Slider />
+
         <Footer />
       </div>
     );
