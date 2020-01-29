@@ -7,11 +7,13 @@ import Slider from '../utils/Slider';
 import Footer from '../utils/Footer';
 
 class Welcome extends React.Component {
+  onSubmit = formValues => {
+    console.log(formValues);
+  };
   render() {
     return (
       <div>
-        <Slider />
-
+        <Slider onSubmit={this.onSubmit} />
         <Footer />
       </div>
     );

@@ -1,0 +1,29 @@
+.search-bar{
+display: inline-flex;
+height: 50px;
+width: auto;
+background-color: hsla(0,0%,100%,.16);
+border-radius: 5px;
+justify-content: space-between;
+padding: 15px;
+}
+
+.search-bar input , input:focus{
+  margin-top: -10px !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+
+.search-bar .btn{
+  margin-top: -6px;
+  border-radius: 10px
+}
+
+.error-message{
+  float: left;
+  color: white;
+}
+
+
+

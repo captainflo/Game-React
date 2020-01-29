@@ -1,6 +1,7 @@
 import React from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import '../css/Slider.css';
+import SearchBar from '../utils/SearchBar';
 
 class Slider extends React.Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class Slider extends React.Component {
             <div className="caption center-align">
               <h3>Wiki Game</h3>
               <h5 className="light grey-text text-lighten-3">All The Game!</h5>
+              <SearchBar onSubmit={this.props.onSubmit} />
             </div>
           </li>
         </ul>
