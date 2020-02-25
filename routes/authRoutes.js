@@ -31,27 +31,6 @@ module.exports = app => {
     }
   );
 
-  // Instagram Auth
-  app.get('/auth/instagram', passport.authenticate('instagram'));
-  app.get(
-    '/auth/instagram/callback',
-    passport.authenticate('instagram', { failureRedirect: '/' }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    }
-  );
-
-  // Facebook Auth
-  app.get('/auth/facebook', passport.authenticate('facebook'));
-  app.get(
-    '/auth/facebook/callback',
-    passport.authenticate('facebook', {
-      successRedirect: '/',
-      failureRedirect: '/'
-    })
-  );
-
   // Linkedin
   app.get(
     '/auth/linkedin',
