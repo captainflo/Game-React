@@ -35,14 +35,23 @@ nav{
 .btn-signin{
   width: 45%;
 }
+.input-field .prefix.active{
+  color: #1488CC !important;
+}
 
 /* UserShow */
 .card{
   color: black;
   padding: 10px;
 }
-.card input, .card input[type=text]:not(.browser-default).validate+label, .card input.valid[type=text]:not(.browser-default), .card input[type=text]:not(.browser-default):focus:not([readonly]){
-  color: black !important;
+
+.user-edit input {
+  color: black !important
+}
+
+input[type=text]:not(.browser-default).validate+label,  input.valid[type=text]:not(.browser-default),  input[type=text]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid #1488CC !important;
+  box-shadow: 0 1px 0 0 #1488CC !important;
 }
 
 .top-left {

@@ -2,63 +2,16 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import validate from './Validation';
+import renderField from './renderField';
 import * as actions from '../actions';
-import { Modal } from 'react-materialize';
-
+import ModalForm from './ModalForm';
 import normalizePhone from './normalizePhone';
 
 class UserEdit extends React.Component {
   state = {
-    errorEmail: '',
-    validPassword: ''
+    image: ''
   };
-
-  onSubmit = formProps => {
-    // Validate Email
-    const email = formProps.email;
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const checkEmail = re.test(email);
-
-    if (checkEmail) {
-      this.setState({ errorEmail: '' });
-    } else {
-      this.setState({
-        errorEmail: 'Email is invalid'
-      });
-    }
-    if (email === undefined) {
-      this.setState({ errorEmail: '' });
-    }
-
-    // Validate Password
-    const password = formProps.password;
-    const pass = /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})/;
-    const checkPassword = pass.test(password);
-
-    if (checkPassword) {
-      this.setState({ validPassword: '' });
-    } else {
-      this.setState({
-        validPassword:
-          'must contains one lowercase characters, one uppercase characters, one number, least 6 characters and maximum of 20'
-      });
-    }
-
-    if (password === undefined) {
-      this.setState({ validPassword: '' });
-    }
-
-    if (
-      (checkEmail === true || email === undefined) &&
-      (checkPassword === true || password === undefined)
-    ) {
-      const id = this.props.auth._id;
-      this.props.editUser(id, formProps, () => {
-        this.props.history.push(`/user/${id}`);
-      });
-    }
-  };
-
   onDelete = () => {
     const id = this.props.auth._id;
     this.props.deleteUser(id, () => {
@@ -66,121 +19,135 @@ class UserEdit extends React.Component {
     });
   };
 
+  deletePhoto = () => {
+    this.setState({ image: '' });
+  };
+
+  uploadWidget = () => {
+    window.cloudinary.openUploadWidget(
+      { cloud_name: 'dwtc6zep7', upload_preset: 'xglbitak', tags: ['xmas'] },
+      (error, result) => {
+        if (result) {
+          this.setState({ image: result[0].url });
+        }
+      }
+    );
+  };
+
   render() {
-    const { handleSubmit } = this.props;
+    const { error, handleSubmit, submitting } = this.props;
+
+    const onSubmit = formProps => {
+      const id = this.props.auth._id;
+
+      const form = {
+        firstName: formProps.firstName,
+        lastName: formProps.lastName,
+        description: formProps.description,
+        phone: formProps.phone,
+        avatar: this.state.image || this.props.auth.avatar
+      };
+
+      this.props.editUser(id, form, () => {
+        this.props.history.push(`/user/${id}`);
+      });
+    };
+
     return (
-      <div className="container">
+      <div className="container user-edit">
         <div className="card">
-          <h4 className="center">
-            Edit <i className="fas fa-user-alt" />
-          </h4>
-          <form onSubmit={handleSubmit(this.onSubmit)}>
+          <h4 className="center">Edit user</h4>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-              <div className="col s12 m6">
+              <div className="col m6 s12">
                 <div className="input-field">
-                  <i className="material-icons prefix">account_circle</i>
                   <Field
                     name="firstName"
-                    id="firstName"
                     type="text"
-                    component="input"
-                    autoComplete="none"
+                    component={renderField}
+                    placeholder="First name"
+                    label="First name"
+                    icon="account_circle"
                   />
-                  <label htmlFor="firstName">First Name</label>
                 </div>
               </div>
-
-              <div className="col s12 m6">
+              <div className="col m6 s12">
                 <div className="input-field">
-                  <i className="material-icons prefix">account_circle</i>
                   <Field
-                    id="lastName"
                     name="lastName"
                     type="text"
-                    component="input"
-                    autoComplete="none"
+                    component={renderField}
+                    placeholder="Last name"
+                    label="Last name"
+                    icon="account_circle"
                   />
-                  <label htmlFor="lastName">Last Name</label>
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col s12 m6">
+              <div className="col m6 s12">
                 <div className="input-field">
-                  <i className="material-icons prefix">email</i>
                   <Field
-                    name="email"
-                    id="email"
+                    name="description"
                     type="text"
-                    component="input"
-                    autoComplete="none"
+                    component={renderField}
+                    label="Description"
+                    icon="description"
                   />
-                  <label htmlFor="email">Email</label>
-                  <div style={{ color: 'red', marginLeft: '45px' }}>
-                    {this.props.errorMessage}
-                  </div>
-                  <div style={{ color: 'red', marginLeft: '45px' }}>
-                    {this.state.errorEmail}
-                  </div>
+                  <span className="asterick right">10 characters Min</span>
                 </div>
               </div>
-
-              <div className="col s12 m6">
+              <div className="col m6 s12">
                 <div className="input-field">
-                  <i className="material-icons prefix">phone</i>
                   <Field
-                    id="phone"
                     name="phone"
                     type="tel"
-                    component="input"
-                    autoComplete="none"
+                    component={renderField}
                     normalize={normalizePhone}
+                    label="786-212-2947"
+                    icon="phone"
                   />
-                  <label htmlFor="phone">Phone</label>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col s12 m6">
-                <div className="input-field">
-                  <i className="material-icons prefix">lock</i>
-                  <Field
-                    name="password"
-                    id="password"
-                    type="text"
-                    component="input"
-                    autoComplete="none"
-                  />
-                  <label htmlFor="password">Password</label>
-                  <div style={{ color: 'red', marginLeft: '45px' }}>
-                    {this.state.validPassword}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button className="waves-effect waves-light btn">
-              <i className="material-icons right">edit</i>Edit
-            </button>
-          </form>
-          <Modal
-            trigger={
-              <button className="waves-effect waves-light btn right red">
-                <i className="material-icons right">cloud</i>Delete Your user
-              </button>
-            }
-          >
-            <div className="center" style={{ padding: '10px', color: 'black' }}>
-              <h5>Are you sure you want to delete your User?</h5>
-              <button
-                onClick={this.onDelete}
-                className="waves-effect waves-light red btn"
+            {error && <strong>{error}</strong>}
+            <div className="upload">
+              <div>Add Photo</div>
+              <p
+                onClick={this.uploadWidget.bind(this)}
+                className="upload-button"
               >
-                <i className="material-icons right">cloud</i>Delete Your user
-                definitely
+                <i className="fas fa-camera"></i>
+              </p>
+
+              {this.state.image ? (
+                <div>
+                  <div className="delete-picture" onClick={this.deletePhoto}>
+                    <i className="far fa-times-circle"></i>
+                  </div>
+                  <img
+                    className="photo-show"
+                    src={this.state.image}
+                    alt="avatar"
+                  />
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+
+            <div className="center">
+              <button
+                type="submit"
+                disabled={submitting}
+                className="waves-effect waves-light btn btn-signin"
+              >
+                Save
               </button>
             </div>
-          </Modal>
+          </form>
         </div>
+        <ModalForm onDelete={this.onDelete} />
       </div>
     );
   }
@@ -188,12 +155,11 @@ class UserEdit extends React.Component {
 
 function mapStateToPros(state) {
   return {
-    errorMessage: state.auth.errorMessage,
     auth: state.auth.authenticated
   };
 }
 
 export default compose(
   connect(mapStateToPros, actions),
-  reduxForm({ form: 'userEdit' })
+  reduxForm({ form: 'userEdit', validate })
 )(UserEdit);
