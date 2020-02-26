@@ -8,12 +8,18 @@ import Footer from '../utils/Footer';
 
 class Welcome extends React.Component {
   onSubmit = formValues => {
-    console.log(formValues);
+    this.props.GetGameByName(formValues.game, id =>
+      this.props.history.push(`/game/${id}`)
+    );
   };
+
   render() {
     return (
       <div>
-        <Slider onSubmit={this.onSubmit} />
+        <Slider
+          onSubmit={this.onSubmit}
+          errorMessage={this.props.errorMessage}
+        />
         <Footer />
       </div>
     );
@@ -22,7 +28,9 @@ class Welcome extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth.authenticated
+    auth: state.auth.authenticated,
+    gameDetails: state.games.gameDetails,
+    errorMessage: state.games.errorMessage
   };
 }
 export default connect(mapStateToProps, actions)(Welcome);

@@ -1,0 +1,8 @@
+.star{
+  padding-top: 2px;
+  margin-left: 2px;
+}
+
+.box-star{
+  display: flex;
+}

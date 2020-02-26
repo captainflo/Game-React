@@ -22,6 +22,9 @@ class Slider extends React.Component {
               <h3>Wiki Game</h3>
               <h5 className="light grey-text text-lighten-3">All The Game!</h5>
               <SearchBar onSubmit={this.props.onSubmit} />
+              <div>
+                {this.props.errorMessage ? this.props.errorMessage : ''}
+              </div>
             </div>
           </li>
         </ul>

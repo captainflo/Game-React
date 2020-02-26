@@ -14,7 +14,11 @@ const renderField = ({ input, type, meta: { touched, error } }) => (
   <div>
     <div>
       <input {...input} placeholder="Search Games" type={type} />
-      {touched && error && <span className="error-message">{error}</span>}
+      {touched && error && (
+        <span style={{ marginTop: '8px' }} className="error-message">
+          {error}
+        </span>
+      )}
     </div>
   </div>
 );
