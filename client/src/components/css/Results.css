@@ -1,0 +1,50 @@
+.box-results{
+background-color: black;
+border-radius: 8px;
+height: 350px;
+overflow: auto;
+margin-top: 40px;
+padding: 10px;
+}
+
+.card-game{
+  width: 150px;
+  height: 150px;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-game img:hover{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+}
+
+.card-game p{
+font-size: 11px;
+margin-top: -4px;
+font-weight: bold;
+
+}
+
+.card-game img {
+  border-radius: 8px;
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.hidden {
+  display: none
+}
+
+
+@media only screen and (max-width: 600px) {
+  .box-results{
+    width: 270px;
+  }
+  .card-game{
+    width: 100%;
+  }
+}
+
+

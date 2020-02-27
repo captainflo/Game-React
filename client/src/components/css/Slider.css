@@ -7,6 +7,10 @@
   padding-left: 5%;
 }
 
+.slider .slides li .caption {
+  top: 5% !important; 
+}
+
 .box-text{
   display: block;
   

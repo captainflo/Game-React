@@ -5,6 +5,7 @@ import {
   AUTH_ERROR,
   EDIT_USER,
   GET_GAME,
+  GET_GAMES,
   ERROR_GAME
 } from './types';
 import * as JWT from 'jwt-decode';
@@ -115,8 +116,31 @@ export const deleteUser = (id, callback) => async dispatch => {
   callback(); /* history callback */
 };
 
-// Search Game By name
-export const GetGameByName = (name, callback) => async dispatch => {
+// Search Game Series By name
+export const GetGamesByName = name => async dispatch => {
+  try {
+    let game = name.split(' ').join('-');
+    const Game = game.toLowerCase();
+    const response = await axios.get(`https://api.rawg.io/api/games/${Game}`);
+    if (response.data.redirect) {
+      const res = await axios.get(
+        `https://api.rawg.io/api/games/${response.data.slug}/game-series`
+      );
+      dispatch({ type: GET_GAMES, payload: res.data });
+    } else {
+      const otherResponse = await axios.get(
+        `https://api.rawg.io/api/games/${Game}/game-series`
+      );
+      dispatch({ type: GET_GAMES, payload: otherResponse.data });
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch({ type: ERROR_GAME, payload: `No Game Found for ${name}` });
+  }
+};
+
+// Search Game Series By name
+export const GetGameByName = name => async dispatch => {
   try {
     let game = name.split(' ').join('-');
     const Game = game.toLowerCase();
@@ -126,12 +150,11 @@ export const GetGameByName = (name, callback) => async dispatch => {
         `https://api.rawg.io/api/games/${response.data.slug}`
       );
       dispatch({ type: GET_GAME, payload: res.data });
-      callback(res.data.id); /* history callback */
     } else {
       dispatch({ type: GET_GAME, payload: response.data });
-      callback(response.data.id); /* history callback */
     }
   } catch (e) {
+    console.log(e);
     dispatch({ type: ERROR_GAME, payload: `No Game Found for ${name}` });
   }
 };

@@ -6,3 +6,4 @@ export const AUTH_ERROR = 'auth_error';
 // GAME
 export const GET_GAME = 'get_game';
 export const ERROR_GAME = 'error_game';
+export const GET_GAMES = 'get_games';

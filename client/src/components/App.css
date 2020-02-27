@@ -78,4 +78,13 @@ input[type=text]:not(.browser-default).validate+label,  input.valid[type=text]:n
   .btn-signin{
     width: 100%;
   }
+  /* Navbar */
+  nav .brand-logo {
+    font-size: 1.1rem !important;
+    margin-left: 0px;
+}
+
+nav .brand-logo i{
+  margin-top: 15px;
+}
 }
