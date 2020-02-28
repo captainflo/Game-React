@@ -4,10 +4,6 @@ import * as actions from '../actions';
 import StarRatingComponent from 'react-star-rating-component';
 
 class GameContent extends React.Component {
-  componentDidMount() {
-    this.props.GetGameById(this.props.id);
-  }
-
   renderContent = () => {
     if (this.props.gameDetails) {
       const { gameDetails } = this.props;
@@ -92,7 +88,6 @@ class GameContent extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     gameDetails: state.games.gameDetails
   };

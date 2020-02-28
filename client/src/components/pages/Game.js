@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import SliderGame from '../utils/SliderGame';
+import SliderGame from '../game/SliderGame';
 import ScrollAnimation from 'react-animate-on-scroll';
 import SimularGame from '../game/SimularGame';
 import GameScreenshots from '../game/GameScreenshots';
@@ -9,10 +9,6 @@ import GameContent from '../game/GameContent';
 import '../css/Game.css';
 
 class Game extends React.Component {
-  componentDidMount() {
-    this.props.GetGameById(this.props.match.params.id);
-  }
-
   render() {
     return (
       <div>
@@ -28,7 +24,7 @@ class Game extends React.Component {
         </ScrollAnimation>
         <div className="container">
           <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
-            <GameContent />
+            <GameContent key={this.props.match.params.id} />
           </ScrollAnimation>
           <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
             <SimularGame

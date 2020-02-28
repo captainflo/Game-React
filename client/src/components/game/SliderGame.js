@@ -8,6 +8,7 @@ class SliderGame extends React.Component {
   componentDidMount() {
     this.props.GetGameById(this.props.id);
   }
+
   renderSilder = () => {
     if (this.props.gameDetails) {
       return (
