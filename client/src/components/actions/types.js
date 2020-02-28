@@ -16,3 +16,6 @@ export const ERROR_SCREENSHOTS = 'error_screenshots';
 // Simular Game
 export const GET_SIMULAR_GAME = 'get_simular_game';
 export const ERROR_SIMULAR_GAME = 'error_simular_game';
+
+// Game Video
+export const GET_GAME_VIDEO = 'get_game_video';

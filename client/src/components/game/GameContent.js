@@ -9,17 +9,7 @@ class GameContent extends React.Component {
       const { gameDetails } = this.props;
       return (
         <div>
-          <p>
-            <i className="fas fa-calendar-day"></i> {gameDetails.released}
-          </p>
-          <a
-            href={gameDetails.website}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-safari"></i> Offical Website
-          </a>
-          <div className="box-star">
+          <div className="box-star right">
             Raiting:
             <div className="star">
               <StarRatingComponent
@@ -30,28 +20,41 @@ class GameContent extends React.Component {
               />
             </div>
           </div>
-          <div>
-            Genres
-            {gameDetails &&
-              gameDetails.genres.map(genre => {
-                return <li key={genre.id}>{genre.name}</li>;
-              })}
-          </div>
-          <div>
-            Platforms
-            {gameDetails &&
-              gameDetails.platforms.map(platform => {
-                return (
-                  <li key={platform.platform.id}>{platform.platform.name}</li>
-                );
-              })}
-          </div>
-          <div>
-            Developers
-            {gameDetails &&
-              gameDetails.developers.map(dev => {
-                return <li key={dev.id}>{dev.name}</li>;
-              })}
+          <a
+            href={gameDetails.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className=""
+          >
+            <i className="fab fa-safari"></i> Offical Website
+          </a>
+          <p>
+            <i className="fas fa-calendar-day"></i> {gameDetails.released}
+          </p>
+          <div className="row">
+            <div className="col m4">
+              Genres
+              {gameDetails &&
+                gameDetails.genres.map(genre => {
+                  return <li key={genre.id}>{genre.name}</li>;
+                })}
+            </div>
+            <div className="col m4">
+              Platforms
+              {gameDetails &&
+                gameDetails.platforms.map(platform => {
+                  return (
+                    <li key={platform.platform.id}>{platform.platform.name}</li>
+                  );
+                })}
+            </div>
+            <div className="col m4">
+              Developers
+              {gameDetails &&
+                gameDetails.developers.map(dev => {
+                  return <li key={dev.id}>{dev.name}</li>;
+                })}
+            </div>
           </div>
           <p>{gameDetails.description_raw}</p>
           <div>
@@ -88,6 +91,7 @@ class GameContent extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     gameDetails: state.games.gameDetails
   };

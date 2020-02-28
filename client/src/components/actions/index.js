@@ -10,6 +10,7 @@ import {
   GET_SCREENSHOTS,
   ERROR_SCREENSHOTS,
   GET_SIMULAR_GAME,
+  GET_GAME_VIDEO,
   ERROR_SIMULAR_GAME,
   ERROR_GAME
 } from './types';
@@ -195,5 +196,17 @@ export const GetSimularGame = id => async dispatch => {
     dispatch({ type: GET_SIMULAR_GAME, payload: response.data });
   } catch (e) {
     dispatch({ type: ERROR_SIMULAR_GAME, payload: `No Simular Game Found` });
+  }
+};
+
+// Get VideoGame
+export const GetVideoGame = id => async dispatch => {
+  try {
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${id}/youtube`
+    );
+    dispatch({ type: GET_GAME_VIDEO, payload: response.data });
+  } catch (e) {
+    dispatch({ type: ERROR_GAME, payload: `No video Game Found` });
   }
 };

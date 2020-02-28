@@ -81,7 +81,8 @@ class SimularGame extends React.Component {
     };
     return (
       <div>
-        <h5>Simular Games</h5>
+        {this.props.simularGames && <h5>Simular Games</h5>}
+
         {this.props.title && <p>{this.props.title}</p>}
         <div className="box-slider-screen">
           <Slider {...settings}>{this.renderScreen()} </Slider>

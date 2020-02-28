@@ -6,6 +6,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import SimularGame from '../game/SimularGame';
 import GameScreenshots from '../game/GameScreenshots';
 import GameContent from '../game/GameContent';
+import GameVideo from '../game/GameVideo';
 import '../css/Game.css';
 
 class Game extends React.Component {
@@ -25,6 +26,12 @@ class Game extends React.Component {
         <div className="container">
           <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
             <GameContent key={this.props.match.params.id} />
+          </ScrollAnimation>
+          <ScrollAnimation animateOnce={true} animateIn="fadeInLeft">
+            <GameVideo
+              key={this.props.match.params.id}
+              id={this.props.match.params.id}
+            />
           </ScrollAnimation>
           <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
             <SimularGame

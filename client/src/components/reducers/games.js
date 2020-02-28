@@ -4,6 +4,7 @@ import {
   GET_GAME_NAME,
   GET_SCREENSHOTS,
   GET_SIMULAR_GAME,
+  GET_GAME_VIDEO,
   ERROR_SIMULAR_GAME,
   ERROR_GAME,
   ERROR_SCREENSHOTS
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
   gameDetails: '',
   allGames: '',
   simularGames: '',
+  gameVideo: '',
   screenshots: '',
   errorMessage: '',
   errorScreenshots: '',
@@ -36,6 +38,8 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, screenshots: action.payload || false };
     case GET_SIMULAR_GAME:
       return { ...state, simularGames: action.payload || false };
+    case GET_GAME_VIDEO:
+      return { ...state, gameVideo: action.payload || false };
     case ERROR_GAME:
       return { ...state, errorMessage: action.payload };
     case ERROR_SIMULAR_GAME:
