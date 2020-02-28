@@ -81,7 +81,6 @@ class Slider extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     auth: state.auth.authenticated,
     game: state.games.gameName,

@@ -24,7 +24,6 @@ class GameContent extends React.Component {
             href={gameDetails.website}
             target="_blank"
             rel="noopener noreferrer"
-            className=""
           >
             <i className="fab fa-safari"></i> Offical Website
           </a>

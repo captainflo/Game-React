@@ -20,7 +20,7 @@ class SimularGame extends React.Component {
                 src={simular.background_image}
                 alt={simular.id}
               />
-              <h6 className="center">{simular.name}</h6>
+              <h6 className="center white-text">{simular.name}</h6>
             </div>
           </Link>
         );
