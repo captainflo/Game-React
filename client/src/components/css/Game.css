@@ -30,8 +30,22 @@
   cursor: pointer;
 }
 
+.video{
+  width: 450px;
+  height: 350px;
+}
+
 .div-img{
   outline:0 
 }
 
 .image-slider:focus {outline:0}
+
+
+@media only screen and (max-width: 600px) {
+  /* Video */
+  .video{
+    width: 250px;
+    height: 175px;
+  }
+}

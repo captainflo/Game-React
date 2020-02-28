@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Iframe from 'react-iframe';
 
 class GameVideo extends React.Component {
   componentDidMount() {
@@ -15,12 +16,13 @@ class GameVideo extends React.Component {
         <div>
           <h5>Trailler</h5>
           <div>
-            <iframe
-              title={his.props.gameVideos[0].id}
-              width="420"
-              height="315"
-              src={`https://www.youtube.com/embed/${video}`}
-            ></iframe>
+            <Iframe
+              url={`http://www.youtube.com/embed/${video}`}
+              id={video}
+              className="video"
+              display="initial"
+              position="relative"
+            />
           </div>
         </div>
       );
