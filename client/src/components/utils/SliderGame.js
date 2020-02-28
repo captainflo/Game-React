@@ -9,12 +9,12 @@ class SliderGame extends React.Component {
     this.props.GetGameById(this.props.id);
   }
   renderSilder = () => {
-    if (this.props.slider) {
+    if (this.props.gameDetails) {
       return (
         <ScrollAnimation animateOnce={true} animateIn="fadeInLeft">
           <div
             style={{
-              backgroundImage: `url(${this.props.slider.background_image})`
+              backgroundImage: `url(${this.props.gameDetails.background_image})`
             }}
             className="box-slider"
           >
@@ -24,7 +24,7 @@ class SliderGame extends React.Component {
               animateIn="fadeInDown"
             >
               <div className="box-text">
-                <h3>{this.props.slider.name}</h3>
+                <h3>{this.props.gameDetails.name}</h3>
               </div>
             </ScrollAnimation>
           </div>
@@ -56,7 +56,7 @@ class SliderGame extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    slider: state.games.gameDetails
+    gameDetails: state.games.gameDetails
   };
 }
 export default connect(mapStateToProps, actions)(SliderGame);

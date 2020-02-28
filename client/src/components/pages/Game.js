@@ -9,7 +9,9 @@ import GameContent from '../game/GameContent';
 import '../css/Game.css';
 
 class Game extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.GetGameById(this.props.match.params.id);
+  }
 
   render() {
     return (

@@ -5,7 +5,7 @@ import StarRatingComponent from 'react-star-rating-component';
 
 class GameContent extends React.Component {
   componentDidMount() {
-    this.props.GetScreenshotsGame(this.props.id);
+    this.props.GetGameById(this.props.id);
   }
 
   renderContent = () => {
