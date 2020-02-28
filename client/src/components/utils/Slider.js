@@ -52,7 +52,7 @@ class Slider extends React.Component {
             />
             <div className="caption center-align">
               <h3>Wiki Game</h3>
-              <h5 className="light grey-text text-lighten-3">All The Game!</h5>
+              <h5 className="light grey-text text-lighten-3">All The Games!</h5>
               <SearchBar onSubmit={this.onSubmit} />
               <div>
                 {this.props.errorMessage ? this.props.errorMessage : ''}
@@ -84,7 +84,7 @@ function mapStateToProps(state) {
   console.log(state);
   return {
     auth: state.auth.authenticated,
-    game: state.games.gameDetails,
+    game: state.games.gameName,
     games: state.games.allGames.results,
     errorMessage: state.games.errorMessage
   };

@@ -3,63 +3,45 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import SliderGame from '../utils/SliderGame';
 import ScrollAnimation from 'react-animate-on-scroll';
-import GameSeries from '../game/GameSeries';
-import StarRatingComponent from 'react-star-rating-component';
+import SimularGame from '../game/SimularGame';
+import GameScreenshots from '../game/GameScreenshots';
+import GameContent from '../game/GameContent';
 import '../css/Game.css';
 
 class Game extends React.Component {
-  componentDidMount() {
-    this.props.GetGameById(this.props.match.params.id);
-  }
+  componentDidMount() {}
 
   render() {
-    const { gameDetails } = this.props;
     return (
       <div>
-        <SliderGame game={gameDetails} />
-        <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
-          <div className="container">
-            <p>
-              <i className="fas fa-calendar-day"></i> {gameDetails.released}
-            </p>
-            <a
-              href={gameDetails.website}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-safari"></i> Offical Website
-            </a>
-            <div className="box-star">
-              Raiting:
-              <div className="star">
-                <StarRatingComponent
-                  name="star"
-                  starCount={5}
-                  value={Math.round(gameDetails.rating)}
-                  editing={false}
-                />
-              </div>
-            </div>
-            <div>
-              Developers
-              {gameDetails &&
-                gameDetails.developers.map(dev => {
-                  return <li key={dev.id}>{dev.name}</li>;
-                })}
-            </div>
-            <p>{gameDetails.description_raw}</p>
-          </div>
+        <SliderGame
+          key={this.props.match.params.id}
+          id={this.props.match.params.id}
+        />
+        <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
+          <GameScreenshots
+            key={this.props.match.params.id}
+            id={this.props.match.params.id}
+          />
         </ScrollAnimation>
-        <GameSeries id={this.props.match.params.id} />
+        <div className="container">
+          <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
+            <GameContent />
+          </ScrollAnimation>
+          <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
+            <SimularGame
+              key={this.props.match.params.id}
+              id={this.props.match.params.id}
+            />
+          </ScrollAnimation>
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
-    auth: state.auth.authenticated,
     gameDetails: state.games.gameDetails
   };
 }

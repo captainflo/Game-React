@@ -5,5 +5,14 @@ export const AUTH_ERROR = 'auth_error';
 
 // GAME
 export const GET_GAME = 'get_game';
+export const GET_GAME_NAME = 'get_game_name';
 export const ERROR_GAME = 'error_game';
 export const GET_GAMES = 'get_games';
+
+//ScreenShots
+export const GET_SCREENSHOTS = 'get_screenshots';
+export const ERROR_SCREENSHOTS = 'error_screenshots';
+
+// Simular Game
+export const GET_SIMULAR_GAME = 'get_simular_game';
+export const ERROR_SIMULAR_GAME = 'error_simular_game';

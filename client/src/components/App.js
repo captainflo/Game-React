@@ -28,15 +28,15 @@ class App extends React.Component {
         <BrowserRouter>
           <Header />
           <Route exact path="/" component={Welcome} />
-          <Route path="/signout" component={Signout} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
+          <Route exact path="/signout" component={Signout} />
+          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/game/:id" component={Game} />
 
           {this.props.authenticated ? (
             <div>
               <Route exact path="/user/:id" component={UserShow} />
-              <Route path="/user/edit/:id" component={UserEdit} />
+              <Route exact path="/user/edit/:id" component={UserEdit} />
             </div>
           ) : (
             ''

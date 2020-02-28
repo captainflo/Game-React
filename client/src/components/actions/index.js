@@ -6,6 +6,11 @@ import {
   EDIT_USER,
   GET_GAME,
   GET_GAMES,
+  GET_GAME_NAME,
+  GET_SCREENSHOTS,
+  ERROR_SCREENSHOTS,
+  GET_SIMULAR_GAME,
+  ERROR_SIMULAR_GAME,
   ERROR_GAME
 } from './types';
 import * as JWT from 'jwt-decode';
@@ -149,9 +154,9 @@ export const GetGameByName = name => async dispatch => {
       const res = await axios.get(
         `https://api.rawg.io/api/games/${response.data.slug}`
       );
-      dispatch({ type: GET_GAME, payload: res.data });
+      dispatch({ type: GET_GAME_NAME, payload: res.data });
     } else {
-      dispatch({ type: GET_GAME, payload: response.data });
+      dispatch({ type: GET_GAME_NAME, payload: response.data });
     }
   } catch (e) {
     console.log(e);
@@ -166,5 +171,29 @@ export const GetGameById = id => async dispatch => {
     dispatch({ type: GET_GAME, payload: response.data });
   } catch (e) {
     dispatch({ type: ERROR_GAME, payload: `No Game Found` });
+  }
+};
+
+// Get ScreenShot Game
+export const GetScreenshotsGame = id => async dispatch => {
+  try {
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${id}/screenshots`
+    );
+    dispatch({ type: GET_SCREENSHOTS, payload: response.data });
+  } catch (e) {
+    dispatch({ type: ERROR_SCREENSHOTS, payload: `No screen Found` });
+  }
+};
+
+// Get SimularGame
+export const GetSimularGame = id => async dispatch => {
+  try {
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${id}/suggested`
+    );
+    dispatch({ type: GET_SIMULAR_GAME, payload: response.data });
+  } catch (e) {
+    dispatch({ type: ERROR_SIMULAR_GAME, payload: `No Simular Game Found` });
   }
 };
