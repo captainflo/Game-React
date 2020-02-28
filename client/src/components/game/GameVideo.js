@@ -93,7 +93,6 @@ class GameVideo extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     gameVideos: state.games.gameVideo.results
   };
