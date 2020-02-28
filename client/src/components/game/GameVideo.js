@@ -16,6 +16,7 @@ class GameVideo extends React.Component {
           <h5>Trailler</h5>
           <div>
             <iframe
+              title={his.props.gameVideos[0].id}
               width="420"
               height="315"
               src={`https://www.youtube.com/embed/${video}`}
