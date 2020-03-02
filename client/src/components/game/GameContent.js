@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import StarRatingComponent from 'react-star-rating-component';
 import ScrollAnimation from 'react-animate-on-scroll';
+import Platforms from './Platforms';
 
 class GameContent extends React.Component {
   renderContent = () => {
@@ -32,27 +33,30 @@ class GameContent extends React.Component {
             <i className="fas fa-calendar-day"></i> {gameDetails.released}
           </p>
           <div className="row">
-            <div className="col m4">
-              Genres
-              {gameDetails &&
-                gameDetails.genres.map(genre => {
-                  return <li key={genre.id}>{genre.name}</li>;
-                })}
-            </div>
-            <div className="col m4">
-              Platforms
+            <div className="col m4 s12">
+              <h6>Platforms</h6>
               {gameDetails &&
                 gameDetails.platforms.map(platform => {
                   return (
-                    <li key={platform.platform.id}>{platform.platform.name}</li>
+                    <Platforms
+                      key={platform.platform.id}
+                      name={platform.platform.name}
+                    />
                   );
                 })}
             </div>
-            <div className="col m4">
-              Developers
+            <div className="col m4 s12">
+              <h6>Genres</h6>
+              {gameDetails &&
+                gameDetails.genres.map(genre => {
+                  return <div key={genre.id}>{genre.name}</div>;
+                })}
+            </div>
+            <div className="col m4 s12">
+              <h6>Developers</h6>
               {gameDetails &&
                 gameDetails.developers.map(dev => {
-                  return <li key={dev.id}>{dev.name}</li>;
+                  return <div key={dev.id}>{dev.name}</div>;
                 })}
             </div>
           </div>
@@ -91,6 +95,7 @@ class GameContent extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     gameDetails: state.games.gameDetails
   };

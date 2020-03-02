@@ -14,8 +14,12 @@ class SimularGame extends React.Component {
     if (this.props.simularGames) {
       return this.props.simularGames.map(simular => {
         return (
-          <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
-            <Link key={simular.id} to={`/game/${simular.id}`}>
+          <ScrollAnimation
+            key={simular.id}
+            animateOnce={true}
+            animateIn="fadeInRight"
+          >
+            <Link to={`/game/${simular.id}`}>
               <div className="div-img">
                 <img
                   className="image-slider-simular"

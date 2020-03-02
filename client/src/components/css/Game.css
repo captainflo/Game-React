@@ -39,6 +39,35 @@
   outline:0 
 }
 
+.box-image {
+  display: flex;
+  height: 30px;
+}
+
+.box-image img{
+  max-width: 50px;
+  height: auto;
+}
+
+.image-sony{
+  margin-top: -10px;
+}
+
+.image-xbox{
+  margin-top: -10px;
+  padding: 10px;
+}
+
+.image-nintendo{
+  margin-top: -10px;
+  margin-right: 5px;
+}
+
+
+
+
+
+
 .image-slider:focus {outline:0}
 
 
