@@ -95,7 +95,6 @@ class GameContent extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     gameDetails: state.games.gameDetails
   };

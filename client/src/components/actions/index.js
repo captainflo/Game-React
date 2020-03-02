@@ -125,8 +125,9 @@ export const deleteUser = (id, callback) => async dispatch => {
 // Search Game Series By name
 export const GetGamesByName = name => async dispatch => {
   try {
-    let game = name.split(' ').join('-');
-    const Game = game.toLowerCase();
+    let removeSpace = name.replace(/\s*$/, '');
+    let game = removeSpace.split(' ').join('-');
+    let Game = game.toLowerCase();
     const response = await axios.get(`https://api.rawg.io/api/games/${Game}`);
     if (response.data.redirect) {
       const res = await axios.get(
@@ -148,8 +149,9 @@ export const GetGamesByName = name => async dispatch => {
 // Search Game Series By name
 export const GetGameByName = name => async dispatch => {
   try {
-    let game = name.split(' ').join('-');
-    const Game = game.toLowerCase();
+    let removeSpace = name.replace(/\s*$/, '');
+    let game = removeSpace.split(' ').join('-');
+    let Game = game.toLowerCase();
     const response = await axios.get(`https://api.rawg.io/api/games/${Game}`);
     if (response.data.redirect) {
       const res = await axios.get(
