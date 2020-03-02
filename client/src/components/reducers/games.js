@@ -1,7 +1,7 @@
 import {
   GET_GAME,
   GET_GAMES,
-  GET_GAME_NAME,
+  GET_SERIE_GAME,
   GET_SCREENSHOTS,
   GET_SIMULAR_GAME,
   GET_GAME_VIDEO,
@@ -10,7 +10,7 @@ import {
   ERROR_SCREENSHOTS
 } from '../actions/types';
 const INITIAL_STATE = {
-  gameName: '',
+  gameSerie: '',
   gameDetails: '',
   allGames: '',
   simularGames: '',
@@ -26,12 +26,10 @@ export default function(state = INITIAL_STATE, action) {
     case GET_GAME:
       return {
         ...state,
-        gameDetails: action.payload || false,
-        gameName: '',
-        allGames: ''
+        gameDetails: action.payload || false
       };
-    case GET_GAME_NAME:
-      return { ...state, gameName: action.payload || false, errorMessage: '' };
+    case GET_SERIE_GAME:
+      return { ...state, gameSerie: action.payload || false, errorMessage: '' };
     case GET_GAMES:
       return { ...state, allGames: action.payload || false, errorMessage: '' };
     case GET_SCREENSHOTS:

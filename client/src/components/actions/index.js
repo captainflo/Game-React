@@ -6,7 +6,7 @@ import {
   EDIT_USER,
   GET_GAME,
   GET_GAMES,
-  GET_GAME_NAME,
+  GET_SERIE_GAME,
   GET_SCREENSHOTS,
   ERROR_SCREENSHOTS,
   GET_SIMULAR_GAME,
@@ -122,24 +122,15 @@ export const deleteUser = (id, callback) => async dispatch => {
   callback(); /* history callback */
 };
 
-// Search Game Series By name
 export const GetGamesByName = name => async dispatch => {
   try {
     let removeSpace = name.replace(/\s*$/, '');
     let game = removeSpace.split(' ').join('-');
     let Game = game.toLowerCase();
-    const response = await axios.get(`https://api.rawg.io/api/games/${Game}`);
-    if (response.data.redirect) {
-      const res = await axios.get(
-        `https://api.rawg.io/api/games/${response.data.slug}/game-series`
-      );
-      dispatch({ type: GET_GAMES, payload: res.data });
-    } else {
-      const otherResponse = await axios.get(
-        `https://api.rawg.io/api/games/${Game}/game-series`
-      );
-      dispatch({ type: GET_GAMES, payload: otherResponse.data });
-    }
+    const response = await axios.get(
+      `https://api.rawg.io/api/games?search=${Game}`
+    );
+    dispatch({ type: GET_GAMES, payload: response.data });
   } catch (e) {
     console.log(e);
     dispatch({ type: ERROR_GAME, payload: `No Game Found for ${name}` });
@@ -147,23 +138,15 @@ export const GetGamesByName = name => async dispatch => {
 };
 
 // Search Game Series By name
-export const GetGameByName = name => async dispatch => {
+export const GetSerieGame = id => async dispatch => {
   try {
-    let removeSpace = name.replace(/\s*$/, '');
-    let game = removeSpace.split(' ').join('-');
-    let Game = game.toLowerCase();
-    const response = await axios.get(`https://api.rawg.io/api/games/${Game}`);
-    if (response.data.redirect) {
-      const res = await axios.get(
-        `https://api.rawg.io/api/games/${response.data.slug}`
-      );
-      dispatch({ type: GET_GAME_NAME, payload: res.data });
-    } else {
-      dispatch({ type: GET_GAME_NAME, payload: response.data });
-    }
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${id}/game-series`
+    );
+    dispatch({ type: GET_SERIE_GAME, payload: response.data });
   } catch (e) {
     console.log(e);
-    dispatch({ type: ERROR_GAME, payload: `No Game Found for ${name}` });
+    dispatch({ type: ERROR_GAME, payload: `No Serie Game Found` });
   }
 };
 

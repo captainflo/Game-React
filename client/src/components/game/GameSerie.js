@@ -1,30 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Slider from 'react-slick';
 import ScrollAnimation from 'react-animate-on-scroll';
 
-class GameScreen extends React.Component {
+class GameSeries extends React.Component {
   componentDidMount() {
-    this.props.GetScreenshotsGame(this.props.id);
+    this.props.GetSerieGame(this.props.id);
   }
 
   renderScreen = () => {
-    if (this.props.gamescreenshots) {
-      return this.props.gamescreenshots.map(screen => {
+    if (this.props.gameSeries) {
+      return this.props.gameSeries.map(game => {
         return (
           <ScrollAnimation
-            key={screen.id}
+            key={game.id}
             animateOnce={true}
             animateIn="fadeInRight"
           >
-            <div className="div-img">
-              <img
-                className="image-slider"
-                src={screen.image}
-                alt={screen.id}
-              />
-            </div>
+            <Link to={`/game/${game.id}`}>
+              <div className="div-img">
+                <img
+                  className="image-slider-simular"
+                  src={game.background_image}
+                  alt={game.id}
+                />
+                <h6 className="center white-text">{game.name}</h6>
+              </div>
+            </Link>
           </ScrollAnimation>
         );
       });
@@ -83,16 +87,20 @@ class GameScreen extends React.Component {
       ]
     };
     return (
-      <div className="box-slider-screen">
-        <Slider {...settings}>{this.renderScreen()} </Slider>
+      <div>
+        {this.props.gameSeries ? <h5>Game Serie</h5> : ''}
+        <div className="box-slider-screen">
+          <Slider {...settings}>{this.renderScreen()} </Slider>
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
-    gamescreenshots: state.games.screenshots.results
+    gameSeries: state.games.gameSerie.results
   };
 }
-export default connect(mapStateToProps, actions)(GameScreen);
+export default connect(mapStateToProps, actions)(GameSeries);

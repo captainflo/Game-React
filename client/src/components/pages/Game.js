@@ -5,6 +5,7 @@ import SliderGame from '../game/SliderGame';
 import SimularGame from '../game/SimularGame';
 import GameScreenshots from '../game/GameScreenshots';
 import GameContent from '../game/GameContent';
+import GameSerie from '../game/GameSerie';
 import GameVideo from '../game/GameVideo';
 import '../css/Game.css';
 
@@ -19,7 +20,8 @@ class Game extends React.Component {
         <SliderGame id={this.props.match.params.id} />
         <GameScreenshots id={this.props.match.params.id} />
         <div className="container">
-          <GameContent />
+          <GameContent id={this.props.match.params.id} />
+          <GameSerie id={this.props.match.params.id} />
           <GameVideo id={this.props.match.params.id} />
           <SimularGame id={this.props.match.params.id} />
         </div>

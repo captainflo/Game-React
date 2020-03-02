@@ -17,7 +17,6 @@ class Slider extends React.Component {
 
   onSubmit = formValues => {
     this.props.GetGamesByName(formValues.game);
-    this.props.GetGameByName(formValues.game);
     this.setState({ class: '' });
   };
 
@@ -55,23 +54,11 @@ class Slider extends React.Component {
               <h5 className="light grey-text text-lighten-3">All The Games!</h5>
               <SearchBar onSubmit={this.onSubmit} />
               <div>
-                {this.props.errorMessage ? this.props.errorMessage : ''}
-              </div>
-              <div>
-                {!this.props.games &&
-                !this.props.games &&
-                !this.props.errorMessage
+                {!this.props.games && !this.props.errorMessage
                   ? this.loader()
                   : ''}
               </div>
-              {this.props.games ? (
-                <Results
-                  gameResult={this.props.game}
-                  games={this.props.games}
-                />
-              ) : (
-                ''
-              )}
+              {this.props.games ? <Results games={this.props.games} /> : ''}
             </div>
           </li>
         </ul>
@@ -81,9 +68,9 @@ class Slider extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     auth: state.auth.authenticated,
-    game: state.games.gameName,
     games: state.games.allGames.results,
     errorMessage: state.games.errorMessage
   };

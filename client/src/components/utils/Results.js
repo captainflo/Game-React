@@ -37,27 +37,22 @@ class Results extends React.Component {
     }
   };
 
+  renderError = () => {
+    if (this.props.games <= 0) {
+      return <div>Can't find your game...</div>;
+    } else {
+      return null;
+    }
+  };
+
   render() {
-    const { gameResult } = this.props;
     return (
       <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
         <div className="box-results">
           <ScrollAnimation delay={1000} animateOnce={true} animateIn="fadeIn">
             <div className="row">
-              <div className="col m3 s6">
-                <div key={gameResult.id}>
-                  <div className="card-game">
-                    <Link to={`/game/${gameResult.id}`}>
-                      <img
-                        src={gameResult.background_image}
-                        alt={gameResult.id}
-                      />
-                      <p>{gameResult.name}</p>
-                    </Link>
-                  </div>
-                </div>
-              </div>
               {this.renderAllGames()}
+              {this.renderError()}
             </div>
           </ScrollAnimation>
         </div>
