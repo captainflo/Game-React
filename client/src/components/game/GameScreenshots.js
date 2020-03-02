@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Slider from 'react-slick';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class GameSeries extends React.Component {
   componentDidMount() {
@@ -12,9 +13,19 @@ class GameSeries extends React.Component {
     if (this.props.gamescreenshots) {
       return this.props.gamescreenshots.map(screen => {
         return (
-          <div className="div-img" key={screen.id}>
-            <img className="image-slider" src={screen.image} alt={screen.id} />
-          </div>
+          <ScrollAnimation
+            key={screen.id}
+            animateOnce={true}
+            animateIn="fadeInRight"
+          >
+            <div className="div-img">
+              <img
+                className="image-slider"
+                src={screen.image}
+                alt={screen.id}
+              />
+            </div>
+          </ScrollAnimation>
         );
       });
     } else {

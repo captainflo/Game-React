@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Slider from 'react-slick';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class SimularGame extends React.Component {
   componentDidMount() {
@@ -13,16 +14,18 @@ class SimularGame extends React.Component {
     if (this.props.simularGames) {
       return this.props.simularGames.map(simular => {
         return (
-          <Link key={simular.id} to={`/game/${simular.id}`}>
-            <div className="div-img">
-              <img
-                className="image-slider-simular"
-                src={simular.background_image}
-                alt={simular.id}
-              />
-              <h6 className="center white-text">{simular.name}</h6>
-            </div>
-          </Link>
+          <ScrollAnimation animateOnce={true} animateIn="fadeInRight">
+            <Link key={simular.id} to={`/game/${simular.id}`}>
+              <div className="div-img">
+                <img
+                  className="image-slider-simular"
+                  src={simular.background_image}
+                  alt={simular.id}
+                />
+                <h6 className="center white-text">{simular.name}</h6>
+              </div>
+            </Link>
+          </ScrollAnimation>
         );
       });
     } else {

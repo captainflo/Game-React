@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import '../css/Slider.css';
 import ScrollAnimation from 'react-animate-on-scroll';
+import '../css/Slider.css';
 
 class SliderGame extends React.Component {
   componentDidMount() {
@@ -19,15 +19,15 @@ class SliderGame extends React.Component {
             }}
             className="box-slider"
           >
-            <ScrollAnimation
+            {/* <ScrollAnimation
               animateOnce={true}
               delay={1000}
               animateIn="fadeInDown"
-            >
-              <div className="box-text">
-                <h3>{this.props.gameDetails.name}</h3>
-              </div>
-            </ScrollAnimation>
+            > */}
+            <div className="box-text">
+              <h3>{this.props.gameDetails.name}</h3>
+            </div>
+            {/* </ScrollAnimation> */}
           </div>
         </ScrollAnimation>
       );

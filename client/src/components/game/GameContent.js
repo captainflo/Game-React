@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import StarRatingComponent from 'react-star-rating-component';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class GameContent extends React.Component {
   renderContent = () => {
     if (this.props.gameDetails) {
       const { gameDetails } = this.props;
       return (
-        <div>
+        <ScrollAnimation animateOnce={true} animateIn="fadeInUp">
           <div className="box-star right">
             Raiting:
             <div className="star">
@@ -63,7 +64,7 @@ class GameContent extends React.Component {
                 return <span key={tag.id}>{tag.name}, </span>;
               })}
           </div>
-        </div>
+        </ScrollAnimation>
       );
     } else {
       return (

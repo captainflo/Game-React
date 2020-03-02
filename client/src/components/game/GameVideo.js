@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import ScrollAnimation from 'react-animate-on-scroll';
 import Slider from 'react-slick';
 
 class GameVideo extends React.Component {
@@ -12,19 +13,25 @@ class GameVideo extends React.Component {
     if (this.props.gameVideos) {
       return this.props.gameVideos.map(video => {
         return (
-          <div key={video.id} className="div-img">
-            <a
-              href={`https://www.youtube.com/watch?v=${video.external_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className="image-slider-simular"
-                src={video.thumbnails.maxresdefault.url}
-                alt={video.id}
-              />
-            </a>
-          </div>
+          <ScrollAnimation
+            key={video.id}
+            animateOnce={true}
+            animateIn="fadeInLeft"
+          >
+            <div className="div-img">
+              <a
+                href={`https://www.youtube.com/watch?v=${video.external_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="image-slider-simular"
+                  src={video.thumbnails.maxresdefault.url}
+                  alt={video.id}
+                />
+              </a>
+            </div>
+          </ScrollAnimation>
         );
       });
     } else {
