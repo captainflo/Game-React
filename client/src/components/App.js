@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './utils/Header';
+// import Header from './utils/Header';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as actions from './actions';
 import { connect } from 'react-redux';
@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <Header />
+          {/* <Header /> */}
           <Route exact path="/" component={Welcome} />
           <Route exact path="/signout" component={Signout} />
           <Route exact path="/signin" component={Signin} />
