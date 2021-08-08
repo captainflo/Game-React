@@ -12,14 +12,14 @@ import {
   GET_SIMULAR_GAME,
   GET_GAME_VIDEO,
   ERROR_SIMULAR_GAME,
-  ERROR_GAME
+  ERROR_GAME,
 } from './types';
 import * as JWT from 'jwt-decode';
 
 ///////////////////////////////// User Authentification ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Signup with Passport JWT
-export const signup = (formProps, callback) => async dispatch => {
+export const signup = (formProps, callback) => async (dispatch) => {
   try {
     const response = await axios.post(`${keys.siteUrl}/signup`, formProps);
     localStorage.setItem('token', response.data.token);
@@ -32,7 +32,7 @@ export const signup = (formProps, callback) => async dispatch => {
       let data = token;
       data = {
         id: data.sub,
-        email: data.email
+        email: data.email,
       };
       const response = await axios.get(`/api/user/${data.id}`);
       dispatch({ type: AUTH_USER, payload: response.data });
@@ -46,7 +46,7 @@ export const signup = (formProps, callback) => async dispatch => {
 };
 
 // Signin with Passport JWT
-export const signin = (formProps, callback) => async dispatch => {
+export const signin = (formProps, callback) => async (dispatch) => {
   try {
     const response = await axios.post(`${keys.siteUrl}/signin`, formProps);
     localStorage.setItem('token', response.data.token);
@@ -59,7 +59,7 @@ export const signin = (formProps, callback) => async dispatch => {
       let data = token;
       data = {
         id: data.sub,
-        email: data.email
+        email: data.email,
       };
       const response = await axios.get(`/api/user/${data.id}`);
       dispatch({ type: AUTH_USER, payload: response.data });
@@ -73,7 +73,7 @@ export const signin = (formProps, callback) => async dispatch => {
 };
 
 // Signout User by Auth or Passport JWT
-export const signout = () => async dispatch => {
+export const signout = () => async (dispatch) => {
   // Signout for Auth(Google, insta, linkedin, facebook)
   await axios.get('/api/logout');
   dispatch({ type: AUTH_USER, payload: '' });
@@ -82,7 +82,7 @@ export const signout = () => async dispatch => {
 };
 
 // Fetch the user by Passport JWT
-export const fetchUser = () => async dispatch => {
+export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/current_user');
   let token = localStorage.token;
   if (token) {
@@ -92,7 +92,7 @@ export const fetchUser = () => async dispatch => {
     let data = token;
     data = {
       id: data.sub,
-      email: data.email
+      email: data.email,
     };
     const response = await axios.get(`/api/user/${data.id}`);
     dispatch({ type: AUTH_USER, payload: response.data });
@@ -103,7 +103,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 // Edit User
-export const editUser = (id, formValues, callback) => async dispatch => {
+export const editUser = (id, formValues, callback) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_ERROR, payload: '' });
     const response = await axios.post(`/api/user/${id}`, formValues);
@@ -115,20 +115,20 @@ export const editUser = (id, formValues, callback) => async dispatch => {
 };
 
 // Edit delete
-export const deleteUser = (id, callback) => async dispatch => {
+export const deleteUser = (id, callback) => async (dispatch) => {
   await axios.delete(`/api/user/${id}`);
   dispatch({ type: EDIT_USER, payload: '' });
   localStorage.removeItem('token');
   callback(); /* history callback */
 };
 
-export const GetGamesByName = name => async dispatch => {
+export const GetGamesByName = (name) => async (dispatch) => {
   try {
     let removeSpace = name.replace(/\s*$/, '');
     let game = removeSpace.split(' ').join('-');
     let Game = game.toLowerCase();
     const response = await axios.get(
-      `https://api.rawg.io/api/games?search=${Game}`
+      `https://api.rawg.io/api/games?key=${keys.rawgApi}&search=${Game}`
     );
     dispatch({ type: GET_GAMES, payload: response.data });
   } catch (e) {
@@ -138,10 +138,10 @@ export const GetGamesByName = name => async dispatch => {
 };
 
 // Search Game Series By name
-export const GetSerieGame = id => async dispatch => {
+export const GetSerieGame = (id) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${id}/game-series`
+      `https://api.rawg.io/api/games/${id}/game-series?key=${keys.rawgApi}`
     );
     dispatch({ type: GET_SERIE_GAME, payload: response.data });
   } catch (e) {
@@ -151,9 +151,11 @@ export const GetSerieGame = id => async dispatch => {
 };
 
 // Get Game By Id
-export const GetGameById = id => async dispatch => {
+export const GetGameById = (id) => async (dispatch) => {
   try {
-    const response = await axios.get(`https://api.rawg.io/api/games/${id}`);
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${id}?key=${keys.rawgApi}`
+    );
     dispatch({ type: GET_GAME, payload: response.data });
   } catch (e) {
     dispatch({ type: ERROR_GAME, payload: `No Game Found` });
@@ -161,10 +163,10 @@ export const GetGameById = id => async dispatch => {
 };
 
 // Get ScreenShot Game
-export const GetScreenshotsGame = id => async dispatch => {
+export const GetScreenshotsGame = (id) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${id}/screenshots`
+      `https://api.rawg.io/api/games/${id}/screenshots?key=${keys.rawgApi}`
     );
     dispatch({ type: GET_SCREENSHOTS, payload: response.data });
   } catch (e) {
@@ -173,10 +175,10 @@ export const GetScreenshotsGame = id => async dispatch => {
 };
 
 // Get SimularGame
-export const GetSimularGame = id => async dispatch => {
+export const GetSimularGame = (id) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${id}/suggested`
+      `https://api.rawg.io/api/games?key=${keys.rawgApi}/${id}/suggested`
     );
     dispatch({ type: GET_SIMULAR_GAME, payload: response.data });
   } catch (e) {
@@ -185,7 +187,7 @@ export const GetSimularGame = id => async dispatch => {
 };
 
 // Get VideoGame
-export const GetVideoGame = id => async dispatch => {
+export const GetVideoGame = (id) => async (dispatch) => {
   try {
     const response = await axios.get(
       `https://api.rawg.io/api/games/${id}/youtube`

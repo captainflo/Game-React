@@ -7,5 +7,6 @@ module.exports = {
   secret: process.env.SECRET,
   siteUrl: process.env.SITE_URL,
   linkedinClientID: process.env.LINKEDIN_CLIENT_ID,
-  linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET
+  linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+  rawgApi: process.env.RAWG,
 };

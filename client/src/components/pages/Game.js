@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import SliderGame from '../game/SliderGame';
-import SimularGame from '../game/SimularGame';
+// import SimularGame from '../game/SimularGame';
 import GameScreenshots from '../game/GameScreenshots';
 import GameContent from '../game/GameContent';
 import GameSerie from '../game/GameSerie';
-import GameVideo from '../game/GameVideo';
+// import GameVideo from '../game/GameVideo';
 import '../css/Game.css';
 
 class Game extends React.Component {
@@ -22,8 +22,8 @@ class Game extends React.Component {
         <div className="container">
           <GameContent id={this.props.match.params.id} />
           <GameSerie id={this.props.match.params.id} />
-          <GameVideo id={this.props.match.params.id} />
-          <SimularGame id={this.props.match.params.id} />
+          {/* <GameVideo id={this.props.match.params.id} /> */}
+          {/* <SimularGame id={this.props.match.params.id} /> */}
         </div>
       </div>
     );
@@ -32,7 +32,7 @@ class Game extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gameDetails: state.games.gameDetails
+    gameDetails: state.games.gameDetails,
   };
 }
 export default connect(mapStateToProps, actions)(Game);

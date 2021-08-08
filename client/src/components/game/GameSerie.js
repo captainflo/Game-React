@@ -12,7 +12,7 @@ class GameSeries extends React.Component {
 
   renderScreen = () => {
     if (this.props.gameSeries) {
-      return this.props.gameSeries.map(game => {
+      return this.props.gameSeries.map((game) => {
         return (
           <ScrollAnimation
             key={game.id}
@@ -66,25 +66,25 @@ class GameSeries extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true
-          }
+            dots: true,
+          },
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 2
-          }
+            initialSlide: 2,
+          },
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
     return (
       <div>
@@ -98,9 +98,8 @@ class GameSeries extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
-    gameSeries: state.games.gameSerie.results
+    gameSeries: state.games.gameSerie.results,
   };
 }
 export default connect(mapStateToProps, actions)(GameSeries);
