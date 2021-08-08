@@ -8,5 +8,5 @@ module.exports = {
   siteUrl: process.env.SITE_URL,
   linkedinClientID: process.env.LINKEDIN_CLIENT_ID,
   linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-  rawgApi: process.env.RAWG,
+  rawgApi: process.env.REACT_APP_RAWG,
 };
